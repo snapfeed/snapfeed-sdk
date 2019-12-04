@@ -1,0 +1,16 @@
+name: example
+description: Snapfeed example project.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.5.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  snapfeed:
+    path: ../
+
+flutter:
+  uses-material-design: true
