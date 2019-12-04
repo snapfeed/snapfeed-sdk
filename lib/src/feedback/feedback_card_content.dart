@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:snapfeed/src/common/config/config_container.dart';
 import 'package:snapfeed/src/common/theme.dart';
 
-class SnapfeedFeedbackCardContent extends StatefulWidget {
-  const SnapfeedFeedbackCardContent({
+class FeedbackCardContent extends StatefulWidget {
+  const FeedbackCardContent({
     Key key,
     @required this.onCancel,
     @required this.onSend,
@@ -16,12 +16,10 @@ class SnapfeedFeedbackCardContent extends StatefulWidget {
   final ValueSetter<String> onSend;
 
   @override
-  _SnapfeedFeedbackCardContentState createState() =>
-      _SnapfeedFeedbackCardContentState();
+  _FeedbackCardContentState createState() => _FeedbackCardContentState();
 }
 
-class _SnapfeedFeedbackCardContentState
-    extends State<SnapfeedFeedbackCardContent> {
+class _FeedbackCardContentState extends State<FeedbackCardContent> {
   TextEditingController _textEditingController;
   var _showSendButton = false;
 
@@ -88,7 +86,6 @@ class _SnapfeedFeedbackCardContentState
         const SizedBox(height: 12),
         if (_showSendButton) ...[
           ButtonBar(
-            buttonPadding: EdgeInsets.zero,
             children: <Widget>[
               FlatButton(
                 color: settings.accentColor.withOpacity(0.1),

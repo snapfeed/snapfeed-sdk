@@ -4,11 +4,19 @@ import 'package:snapfeed/src/common/config/config_container.dart';
 import 'package:snapfeed/src/common/theme.dart';
 import 'package:snapfeed/src/feedback/drawer/color_picker.dart';
 import 'package:snapfeed/src/feedback/drawer/feedback_pen.dart';
+import 'package:snapfeed/src/feedback/feedback_state.dart';
 import 'package:snapfeed/src/feedback/feedback_ui_state.dart';
-import 'package:snapfeed/src/snapfeed_widget.dart';
+
+typedef FeedbackStateChangeCallback = void Function(FeedbackState newState);
 
 class FeedbackDrawer extends StatefulWidget {
   static const width = 80.0;
+
+  const FeedbackDrawer({Key key, @required this.onStateChanged})
+      : assert(onStateChanged != null),
+        super(key: key);
+
+  final FeedbackStateChangeCallback onStateChanged;
 
   @override
   _FeedbackDrawerState createState() => _FeedbackDrawerState();
@@ -45,7 +53,7 @@ class _FeedbackDrawerState extends State<FeedbackDrawer> {
           ColorPicker(
             selectedColor: feedbackState.penColor,
             onColorSelected: (color) {
-              Snapfeed.of(context).setFeedbackState(
+              widget.onStateChanged(
                 feedbackState.copyWith(
                   uiState: FeedbackUiState.draw,
                   penColor: color,
@@ -70,11 +78,12 @@ class _FeedbackDrawerState extends State<FeedbackDrawer> {
       behavior: HitTestBehavior.translucent,
       onTap: () {
         if (!isSelected) {
-          Snapfeed.of(context).setFeedbackState(settingsContainer.feedbackState
-              .copyWith(
-                  uiState: isNavigate
-                      ? FeedbackUiState.navigate
-                      : FeedbackUiState.draw));
+          widget.onStateChanged(
+            settingsContainer.feedbackState.copyWith(
+                uiState: isNavigate
+                    ? FeedbackUiState.navigate
+                    : FeedbackUiState.draw),
+          );
         }
       },
       child: Container(

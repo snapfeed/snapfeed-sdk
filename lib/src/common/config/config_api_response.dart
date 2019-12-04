@@ -1,11 +1,11 @@
-class SnapfeedConfigApiResponse {
-  SnapfeedConfigApiResponse(
+class ConfigApiResponse {
+  ConfigApiResponse(
     this.accentColor,
     this.photoURL,
   );
 
-  factory SnapfeedConfigApiResponse.fromJson(Map<String, dynamic> json) {
-    return SnapfeedConfigApiResponse(
+  factory ConfigApiResponse.fromJson(Map<String, dynamic> json) {
+    return ConfigApiResponse(
       json['accentColor'] as int,
       json['photoURL'] as String,
     );

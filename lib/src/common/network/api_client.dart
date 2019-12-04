@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:meta/meta.dart';
 import 'package:snapfeed/src/common/config/config_api_response.dart';
 import 'package:snapfeed/src/common/network/data_state.dart';
 
@@ -76,21 +75,19 @@ class SnapfeedApiClient {
 
   Future<void> getConfig({
     @required
-        SetSnapfeedDataStateCallback<SnapfeedConfigApiResponse>
-            onDataStateChanged,
+        SetSnapfeedDataStateCallback<ConfigApiResponse> onDataStateChanged,
   }) async {
-    onDataStateChanged(SnapfeedDataState<SnapfeedConfigApiResponse>.loading());
+    onDataStateChanged(DataState<ConfigApiResponse>.loading());
     try {
       onDataStateChanged(
-        SnapfeedDataState<SnapfeedConfigApiResponse>.success(
-          SnapfeedConfigApiResponse.fromJson(
+        DataState<ConfigApiResponse>.success(
+          ConfigApiResponse.fromJson(
             await get('$_projectsPath/$projectId/$_configPath'),
           ),
         ),
       );
     } catch (exception) {
-      onDataStateChanged(
-          SnapfeedDataState<SnapfeedConfigApiResponse>.error(exception));
+      onDataStateChanged(DataState<ConfigApiResponse>.error(exception));
     }
   }
 
@@ -100,10 +97,10 @@ class SnapfeedApiClient {
     @required
         SetSnapfeedDataStateCallback<Map<String, dynamic>> onDataStateChanged,
   }) async {
-    onDataStateChanged(SnapfeedDataState<Map<String, dynamic>>.loading());
+    onDataStateChanged(DataState<Map<String, dynamic>>.loading());
     try {
       onDataStateChanged(
-        SnapfeedDataState<Map<String, dynamic>>.success(
+        DataState<Map<String, dynamic>>.success(
           await post(
             urlPath: '$_projectsPath/$projectId/$_feedbackPath',
             arguments: <String, String>{
@@ -121,11 +118,9 @@ class SnapfeedApiClient {
         ),
       );
     } catch (exception) {
-      onDataStateChanged(
-          SnapfeedDataState<Map<String, dynamic>>.error(exception));
+      onDataStateChanged(DataState<Map<String, dynamic>>.error(exception));
     }
   }
 }
 
-typedef SetSnapfeedDataStateCallback<T> = void Function(
-    SnapfeedDataState<T> dataState);
+typedef SetSnapfeedDataStateCallback<T> = void Function(DataState<T> dataState);
