@@ -3,6 +3,12 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:snapfeed/src/common/theme.dart';
 
+/// Used to configure Snapfeed. You can overwrite all values by directly
+/// invoking it's constructor, or, if you just want to overwrite a few options,
+/// use `SnapfeedConfig.defaultConfig(...)`.
+///
+/// Keep in mind that a few options may be overridden by your current
+/// configuration in the Snapfeed admin console (e.g. accent color).
 class SnapfeedConfig {
   const SnapfeedConfig({
     @required this.accentColor,
@@ -17,6 +23,11 @@ class SnapfeedConfig {
     @required this.feedbackSendButton,
   });
 
+  /// Creates a default [SnapfeedConfig] and overrides the specified
+  /// values.
+  ///
+  /// Keep in mind that a few options may be overridden by your current
+  /// configuration in the Snapfeed admin console (e.g. accent color).
   SnapfeedConfig.defaultConfig({
     Color primaryColor,
     String teaserPhotoUrl,

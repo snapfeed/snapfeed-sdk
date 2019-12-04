@@ -18,7 +18,22 @@ import 'package:snapfeed/src/feedback/feedback_card_content.dart';
 import 'package:snapfeed/src/feedback/feedback_state.dart';
 import 'package:snapfeed/src/feedback/feedback_ui_state.dart';
 import 'package:snapfeed/src/feedback/sketcher/sketcher.dart';
+import 'package:snapfeed/src/snapfeed_controller.dart';
 
+/// This is the Snapfeed widget and represents the core of all Snapfeed
+/// functionality. For optimal performance make sure to place this widget at the
+/// very top of your widget tree or make it the root one.
+///
+/// The [projectId] and [secret] properties must be non-null and valid
+/// credentials from an active Snapfeed project. You can create a new project at
+/// [Snapfeed.dev](https://snapfeed.dev).
+///
+/// By passing a [config] you can specify a custom configuration to tailor
+/// Snapfeeds's appearance to your needs and branding guidelines.
+///
+/// See also:
+///
+/// * [SnapfeedConfig], which describes the actual [Snapfeed] configuration.
 class Snapfeed extends StatefulWidget {
   const Snapfeed({
     Key key,
@@ -39,9 +54,12 @@ class Snapfeed extends StatefulWidget {
   @override
   SnapfeedState createState() => SnapfeedState();
 
-  static SnapfeedState of(BuildContext context) =>
-      context.ancestorStateOfType(const TypeMatcher<SnapfeedState>())
-          as SnapfeedState;
+  static SnapfeedController of(BuildContext context) {
+    final snapfeedState =
+        context.ancestorStateOfType(const TypeMatcher<SnapfeedState>())
+            as SnapfeedState;
+    return SnapfeedController(snapfeedState);
+  }
 }
 
 class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
@@ -181,7 +199,9 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
                 color: SnapfeedTheme.lightGrey,
                 child: Container(
                   alignment: Alignment.centerRight,
-                  child: FeedbackDrawer(),
+                  child: FeedbackDrawer(
+                    onStateChanged: _setFeedbackState,
+                  ),
                 ),
               ),
             ),
@@ -256,19 +276,7 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
     return const SizedBox.shrink();
   }
 
-  void startFeedback() {
-    setState(() {
-      if (_uiState == SnapfeedUiState.hidden) {
-        _uiState = SnapfeedUiState.loading;
-        _getConfiguration();
-        _animationControllerSheet.forward();
-      } else {
-        _close();
-      }
-    });
-  }
-
-  void setFeedbackState(FeedbackState feedbackState) {
+  void _setFeedbackState(FeedbackState feedbackState) {
     setState(() {
       _feedbackState = feedbackState;
     });
@@ -310,6 +318,18 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
       _uiState = SnapfeedUiState.hidden;
       _animationControllerSheet.reverse();
       _animationControllerScreen.reverse();
+    });
+  }
+
+  void startFeedback() {
+    setState(() {
+      if (_uiState == SnapfeedUiState.hidden) {
+        _uiState = SnapfeedUiState.loading;
+        _getConfiguration();
+        _animationControllerSheet.forward();
+      } else {
+        _close();
+      }
     });
   }
 }
