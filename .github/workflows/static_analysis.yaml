@@ -1,4 +1,4 @@
-name: Static analysis
+name: Static Analysis
 
 on: [push]
 
@@ -18,4 +18,4 @@ jobs:
     - name: Check Formatting
       run: sudo --preserve-env=PATH env flutter pub run tool/reformat.dart
     - name: Analyze
-      run: sudo --preserve-env=PATH env flutter analyze --fatal-infos --fatal-warnings lib
+      run: sudo --preserve-env=PATH env flutter analyze lib
