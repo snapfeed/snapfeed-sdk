@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:meta/meta.dart';
 import 'package:snapfeed/src/common/config/config_api_response.dart';
 import 'package:snapfeed/src/common/network/data_state.dart';
 
