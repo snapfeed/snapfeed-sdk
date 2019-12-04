@@ -86,7 +86,6 @@ class _FeedbackCardContentState extends State<FeedbackCardContent> {
         const SizedBox(height: 12),
         if (_showSendButton) ...[
           ButtonBar(
-            buttonPadding: EdgeInsets.zero,
             children: <Widget>[
               FlatButton(
                 color: settings.accentColor.withOpacity(0.1),
