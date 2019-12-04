@@ -50,6 +50,8 @@ class FeedbackSketcherModel extends ChangeNotifier {
 }
 
 class FeedbackSketcherGestureModel {
+  FeedbackSketcherGestureModel(this.mode, this.paint) : assert(mode != null && paint != null);
+
   factory FeedbackSketcherGestureModel.point(Color color, Offset point) {
     return FeedbackSketcherGestureModel(
       ui.PointMode.points,
@@ -59,6 +61,7 @@ class FeedbackSketcherGestureModel {
         ..color = color,
     )..add(point);
   }
+
   factory FeedbackSketcherGestureModel.startLine(Color color, Offset start) {
     return FeedbackSketcherGestureModel(
       ui.PointMode.lines,
@@ -68,8 +71,6 @@ class FeedbackSketcherGestureModel {
         ..color = color,
     )..add(start);
   }
-
-  FeedbackSketcherGestureModel(this.mode, this.paint) : assert(mode != null && paint != null);
 
   final ui.PointMode mode;
   final Paint paint;

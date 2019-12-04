@@ -97,7 +97,7 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
                         ),
                       ),
                     ),
-                    isCaptured ? Image(image: _screenshotImage) : const SizedBox.shrink(),
+                    if (isCaptured) Image(image: _screenshotImage),
                   ],
                 );
               },
@@ -153,7 +153,7 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
     final canvas = Canvas(recording, Rect.fromLTWH(0.0, 0.0, width, height))
       ..drawImage(image, Offset.zero, Paint())
       ..scale(width / _model.width, height / _model.height);
-    _SketchPainter(_model)..paint(canvas, size);
+    _SketchPainter(_model).paint(canvas, size);
     final combined = await recording.endRecording().toImage(width.toInt(), height.toInt());
     return (await combined.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
   }
