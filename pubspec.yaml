@@ -1,6 +1,6 @@
 name: snapfeed
-description: The interactive user feedback tool for Flutter.
-version: 0.0.1
+description: Snapfeed is an interactive user feedback tool for Flutter apps. Its purely written in Dart and runs on Android, iOS, Desktop and the Web.
+version: 0.1.0
 author: snapfeed.dev
 homepage: https://snapfeed.dev
 

@@ -20,19 +20,37 @@ Now your new project has been created! On the **Settings** page you will find yo
 
 <img alt="Step2" src="https://user-images.githubusercontent.com/11478053/69979202-26b07980-152e-11ea-9fcb-aa4780d92347.png">
 
-### Flutter app setup
+### Setting up your Flutter project
 
-After successfully creating a new project in the Snapfeed admin console it's time to add Snapfeed to your app. Simply open your `pubspec.yaml` file and add the current version of Snapfeed as a dependency, e.g. `snapfeed: 0.0.1`. Make sure to get the newest version.
-
-<img alt="Screenshot 2019-12-02 at 18 09 22" src="https://user-images.githubusercontent.com/11478053/69979597-e69dc680-152e-11ea-9f0b-ddf50f074877.png">
+After successfully creating a new project in the Snapfeed admin console it's time to add Snapfeed to your app. Simply open your `pubspec.yaml` file and add the current version of Snapfeed as a dependency, e.g. `snapfeed: 0.1.0`. Make sure to get the newest version.
 
 Now get all pub packages by clicking on `Packages get` in your IDE or executing `flutter packages get` inside your Flutter project.
 
-Then head over to the main entry point of your app, which most likely resides inside `main.dart`. In here wrap your root widget (in this case it is a `MaterialApp` widget) inside a `Snapfeed` widget and provide your API credentials as parameters.
+Head over to the main entry point of your app which most likely resides inside `main.dart`. In here wrap your root widget  inside a `Snapfeed` widget and provide your API credentials as parameters. That was already the hard part 🙌
 
-### Android / iOS setup
+```
+void main() => runApp(MyApp());
 
-Snapfeed is completely written in Dart and does not have any native dependencies. However, under Android it needs permission for internet access (for sending user feedback back to you). If you already use Flutter in production, chances are quite high that you already added the internet permission to the manifest - if not, add the following line to the `AndroidManifest.xml` in your Android project folder:
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Snapfeed(
+      projectId: "YOUR-PROJECT-ID",
+      secret: "YOUR-SECRET",
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        home: ...
+      ),
+    );
+  }  
+}
+```
+
+Now you can call `Snapfeed.of(context).startFeedback()` from anywhere inside your app to start the feedback process!
+
+### Android / iOS specific setup
+
+Snapfeed is by design written in Dart and thus does not have any native dependencies. However, when running on Android it needs the internet permission (for sending user feedback back to you). If you already use Flutter in production, chances are quite high that you already added the internet permission to the manifest - if not, add the following line to the `AndroidManifest.xml` in your Android project folder:
 
 ```
 <manifest ...>
@@ -42,7 +60,6 @@ Snapfeed is completely written in Dart and does not have any native dependencies
 ```
 
 That's it!
-
   
 ## License  
   

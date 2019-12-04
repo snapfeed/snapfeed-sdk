@@ -1,3 +1,3 @@
-## [0.0.1] - Private Beta
+## [0.1.0] - Private Beta
 
-* Private Beta testing - weee 🎉
+* Private Beta testing is here 🎉
