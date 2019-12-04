@@ -16,10 +16,12 @@ class SnapfeedFeedbackCardContent extends StatefulWidget {
   final ValueSetter<String> onSend;
 
   @override
-  _SnapfeedFeedbackCardContentState createState() => _SnapfeedFeedbackCardContentState();
+  _SnapfeedFeedbackCardContentState createState() =>
+      _SnapfeedFeedbackCardContentState();
 }
 
-class _SnapfeedFeedbackCardContentState extends State<SnapfeedFeedbackCardContent> {
+class _SnapfeedFeedbackCardContentState
+    extends State<SnapfeedFeedbackCardContent> {
   TextEditingController _textEditingController;
   var _showSendButton = false;
 
@@ -67,9 +69,12 @@ class _SnapfeedFeedbackCardContentState extends State<SnapfeedFeedbackCardConten
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(
             filled: true,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none),
             fillColor: SnapfeedTheme.lightGrey,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             hintText: settings.feedbackHint,
           ),
           minLines: 1,
@@ -87,7 +92,8 @@ class _SnapfeedFeedbackCardContentState extends State<SnapfeedFeedbackCardConten
             children: <Widget>[
               FlatButton(
                 color: settings.accentColor.withOpacity(0.1),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
                 onPressed: () {
                   widget.onSend(_textEditingController.text);
                 },
@@ -95,7 +101,8 @@ class _SnapfeedFeedbackCardContentState extends State<SnapfeedFeedbackCardConten
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Text(
                     settings.feedbackSendButton,
-                    style: SnapfeedTheme.button.copyWith(color: settings.accentColor),
+                    style: SnapfeedTheme.button
+                        .copyWith(color: settings.accentColor),
                   ),
                 ),
               ),

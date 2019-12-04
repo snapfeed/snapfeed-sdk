@@ -7,7 +7,8 @@ abstract class SnapfeedDataState<T> {
 
   factory SnapfeedDataState.success(T response) => Success<T>(response);
 
-  factory SnapfeedDataState.error(dynamic exception) => UncaughtException<T>(exception);
+  factory SnapfeedDataState.error(dynamic exception) =>
+      UncaughtException<T>(exception);
 
   bool get isIdle => this is Idle;
 
@@ -21,7 +22,8 @@ abstract class SnapfeedDataState<T> {
 
   bool get isError => this is UncaughtException;
 
-  UncaughtException<T> get error => this is UncaughtException ? this as UncaughtException<T> : null;
+  UncaughtException<T> get error =>
+      this is UncaughtException ? this as UncaughtException<T> : null;
 }
 
 class Idle<T> extends SnapfeedDataState<T> {

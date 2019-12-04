@@ -19,5 +19,6 @@ class SnapfeedConfigContainer extends InheritedWidget {
       oldWidget.config != config || oldWidget.feedbackState != feedbackState;
 
   static SnapfeedConfigContainer of(BuildContext context) =>
-      context.inheritFromWidgetOfExactType(SnapfeedConfigContainer) as SnapfeedConfigContainer;
+      context.inheritFromWidgetOfExactType(SnapfeedConfigContainer)
+          as SnapfeedConfigContainer;
 }

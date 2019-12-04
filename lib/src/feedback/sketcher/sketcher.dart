@@ -59,7 +59,9 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      behavior: widget.isEnabled ? HitTestBehavior.opaque : HitTestBehavior.translucent,
+      behavior: widget.isEnabled
+          ? HitTestBehavior.opaque
+          : HitTestBehavior.translucent,
       dragStartBehavior: DragStartBehavior.down,
       onTapUp: widget.isEnabled ? _onTapUp : null,
       onPanDown: widget.isEnabled ? _onPanDown : null,
@@ -73,7 +75,8 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
               if (size.width != _model.width || size.height != _model.height) {
                 scheduleMicrotask(() {
                   setState(() {
-                    _model = _model.copyWith(width: size.width, height: size.height);
+                    _model =
+                        _model.copyWith(width: size.width, height: size.height);
                   });
                 });
               }
@@ -83,8 +86,10 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
             child: FutureBuilder<void>(
               future: _futureCapture,
               builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                final isCapturing = snapshot.connectionState == ConnectionState.active;
-                final isCaptured = snapshot.connectionState == ConnectionState.done;
+                final isCapturing =
+                    snapshot.connectionState == ConnectionState.active;
+                final isCaptured =
+                    snapshot.connectionState == ConnectionState.done;
                 return Stack(
                   children: <Widget>[
                     Offstage(
@@ -109,11 +114,13 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
   }
 
   void _onTapUp(TapUpDetails details) {
-    _model.addGesture(FeedbackSketcherGestureModel.point(widget.color, details.localPosition));
+    _model.addGesture(FeedbackSketcherGestureModel.point(
+        widget.color, details.localPosition));
   }
 
   void _onPanDown(DragDownDetails details) {
-    _model.addGesture(FeedbackSketcherGestureModel.startLine(widget.color, details.localPosition));
+    _model.addGesture(FeedbackSketcherGestureModel.startLine(
+        widget.color, details.localPosition));
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
@@ -137,14 +144,16 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
   }
 
   Future<Uint8List> _getScreenshot() async {
-    final canvas = _sketcherRepaintBoundaryGlobalKey.currentContext.findRenderObject() as RenderRepaintBoundary;
+    final canvas = _sketcherRepaintBoundaryGlobalKey.currentContext
+        .findRenderObject() as RenderRepaintBoundary;
     final image = await canvas.toImage(pixelRatio: 1.5);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     return byteData.buffer.asUint8List();
   }
 
   Future<Uint8List> getSketch() async {
-    final codec = await PaintingBinding.instance.instantiateImageCodec(_screenshotData);
+    final codec =
+        await PaintingBinding.instance.instantiateImageCodec(_screenshotData);
     final image = (await codec.getNextFrame()).image;
     final width = image.width.toDouble();
     final height = image.height.toDouble();
@@ -154,8 +163,11 @@ class FeedbackSketcherState extends State<FeedbackSketcher> {
       ..drawImage(image, Offset.zero, Paint())
       ..scale(width / _model.width, height / _model.height);
     _SketchPainter(_model).paint(canvas, size);
-    final combined = await recording.endRecording().toImage(width.toInt(), height.toInt());
-    return (await combined.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+    final combined =
+        await recording.endRecording().toImage(width.toInt(), height.toInt());
+    return (await combined.toByteData(format: ui.ImageByteFormat.png))
+        .buffer
+        .asUint8List();
   }
 }
 

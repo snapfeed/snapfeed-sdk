@@ -13,7 +13,8 @@ class SnapfeedInternalApp extends StatefulWidget {
   _SnapfeedInternalAppState createState() => _SnapfeedInternalAppState();
 }
 
-class _SnapfeedInternalAppState extends State<SnapfeedInternalApp> with WidgetsBindingObserver {
+class _SnapfeedInternalAppState extends State<SnapfeedInternalApp>
+    with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(

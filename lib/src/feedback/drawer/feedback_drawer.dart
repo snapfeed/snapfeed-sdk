@@ -71,7 +71,10 @@ class _FeedbackDrawerState extends State<FeedbackDrawer> {
       onTap: () {
         if (!isSelected) {
           Snapfeed.of(context).setFeedbackState(settingsContainer.feedbackState
-              .copyWith(uiState: isNavigate ? FeedbackUiState.navigate : FeedbackUiState.draw));
+              .copyWith(
+                  uiState: isNavigate
+                      ? FeedbackUiState.navigate
+                      : FeedbackUiState.draw));
         }
       },
       child: Container(
@@ -88,7 +91,9 @@ class _FeedbackDrawerState extends State<FeedbackDrawer> {
             Container(
               width: 48,
               height: 2,
-              color: isSelected ? settingsContainer.config.accentColor : Colors.transparent,
+              color: isSelected
+                  ? settingsContainer.config.accentColor
+                  : Colors.transparent,
             )
           ],
         ),
