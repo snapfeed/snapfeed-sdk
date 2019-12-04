@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:snapfeed/src/common/config/config_api_response.dart';
 import 'package:snapfeed/src/common/config/config_container.dart';
-import 'package:snapfeed/src/common/config/config_model.dart';
+import 'package:snapfeed/src/common/config/snapfeed_config.dart';
 import 'package:snapfeed/src/common/network/api_client.dart';
 import 'package:snapfeed/src/common/network/data_state.dart';
 import 'package:snapfeed/src/common/theme.dart';
@@ -33,7 +33,7 @@ class Snapfeed extends StatefulWidget {
 
   final String projectId;
   final String secret;
-  final SnapfeedConfiguration config;
+  final SnapfeedConfig config;
   final Widget child;
 
   @override
@@ -48,8 +48,8 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
   final _sketcherKey = GlobalKey<FeedbackSketcherState>();
 
   SnapfeedApiClient _apiClient;
-  SnapfeedConfiguration _config;
-  SnapfeedFeedbackState _feedbackState = SnapfeedFeedbackState();
+  SnapfeedConfig _config;
+  FeedbackState _feedbackState = FeedbackState();
   SnapfeedUiState _uiState = SnapfeedUiState.hidden;
 
   AnimationController _animationControllerScreen;
@@ -63,7 +63,7 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
   Animation<Offset> _slideDrawPanelIn;
   Animation<Offset> _slideDrawPanelInOverlay;
 
-  SnapfeedConfigApiResponse _response;
+  ConfigApiResponse _response;
 
   @override
   void initState() {
@@ -115,13 +115,13 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
         httpClient: http.Client(),
         projectId: widget.projectId,
         secret: widget.secret);
-    _config = widget.config ?? SnapfeedConfiguration.defaultConfig();
+    _config = widget.config ?? SnapfeedConfig.defaultConfig();
   }
 
   @override
   void didUpdateWidget(Snapfeed oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _config = widget.config ?? SnapfeedConfiguration.defaultConfig();
+    _config = widget.config ?? SnapfeedConfig.defaultConfig();
   }
 
   @override
@@ -247,7 +247,7 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
           },
         );
       case SnapfeedUiState.feedback:
-        return SnapfeedFeedbackCardContent(
+        return FeedbackCardContent(
           onCancel: _close,
           onSend: _sendFeedback,
         );
@@ -268,7 +268,7 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
     });
   }
 
-  void setFeedbackState(SnapfeedFeedbackState feedbackState) {
+  void setFeedbackState(FeedbackState feedbackState) {
     setState(() {
       _feedbackState = feedbackState;
     });
@@ -276,8 +276,7 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
 
   Future<void> _getConfiguration() async {
     await _apiClient.getConfig(
-      onDataStateChanged:
-          (SnapfeedDataState<SnapfeedConfigApiResponse> dataState) async {
+      onDataStateChanged: (DataState<ConfigApiResponse> dataState) async {
         if (dataState.isIdleOrLoading) {
           _uiState = SnapfeedUiState.loading;
         }
@@ -301,14 +300,13 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
     await _apiClient.sendFeedback(
       message: message,
       screenshot: screenshot,
-      onDataStateChanged:
-          (SnapfeedDataState<Map<String, dynamic>> dataState) {},
+      onDataStateChanged: (DataState<Map<String, dynamic>> dataState) {},
     );
   }
 
   void _close() {
     setState(() {
-      _feedbackState = SnapfeedFeedbackState();
+      _feedbackState = FeedbackState();
       _uiState = SnapfeedUiState.hidden;
       _animationControllerSheet.reverse();
       _animationControllerScreen.reverse();

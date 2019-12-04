@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:snapfeed/src/common/config/config_model.dart';
+import 'package:snapfeed/src/common/config/snapfeed_config.dart';
 import 'package:snapfeed/src/feedback/feedback_state.dart';
 
 class SnapfeedConfigContainer extends InheritedWidget {
@@ -11,8 +11,8 @@ class SnapfeedConfigContainer extends InheritedWidget {
   })  : assert(config != null),
         super(key: key, child: child);
 
-  final SnapfeedConfiguration config;
-  final SnapfeedFeedbackState feedbackState;
+  final SnapfeedConfig config;
+  final FeedbackState feedbackState;
 
   @override
   bool updateShouldNotify(SnapfeedConfigContainer oldWidget) =>

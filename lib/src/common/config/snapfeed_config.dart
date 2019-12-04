@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:snapfeed/src/common/theme.dart';
 
-class SnapfeedConfiguration {
-  const SnapfeedConfiguration({
+class SnapfeedConfig {
+  const SnapfeedConfig({
     @required this.accentColor,
     @required this.teaserPhotoUrl,
     @required this.teaserTitle,
@@ -17,7 +17,7 @@ class SnapfeedConfiguration {
     @required this.feedbackSendButton,
   });
 
-  SnapfeedConfiguration.defaultConfig({
+  SnapfeedConfig.defaultConfig({
     Color primaryColor,
     String teaserPhotoUrl,
     String teaserTitle,
@@ -42,7 +42,7 @@ class SnapfeedConfiguration {
         feedbackHint = feedbackHint ?? 'Tell us something',
         feedbackSendButton = feedbackSendButton ?? 'Send Feedback';
 
-  SnapfeedConfiguration copyWith({
+  SnapfeedConfig copyWith({
     Color accentColor,
     String teaserPhotoUrl,
     String teaserTitle,
@@ -54,7 +54,7 @@ class SnapfeedConfiguration {
     String feedbackHint,
     String feedbackSendButton,
   }) {
-    return SnapfeedConfiguration(
+    return SnapfeedConfig(
       accentColor: accentColor ?? this.accentColor,
       teaserPhotoUrl: teaserPhotoUrl ?? this.teaserPhotoUrl,
       teaserTitle: teaserTitle ?? this.teaserTitle,
