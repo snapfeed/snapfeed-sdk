@@ -10,7 +10,10 @@ import 'package:snapfeed/src/common/config/config_api_response.dart';
 import 'package:snapfeed/src/common/network/data_state.dart';
 
 class SnapfeedApiClient {
-  SnapfeedApiClient({@required this.httpClient, @required this.projectId, @required this.secret});
+  SnapfeedApiClient(
+      {@required this.httpClient,
+      @required this.projectId,
+      @required this.secret});
 
   static const String _host = 'https://api.snapfeed.dev/v1/';
   static const String _projectsPath = 'projects';
@@ -26,8 +29,10 @@ class SnapfeedApiClient {
 
   Future<Map<String, dynamic>> get(String urlPath) async {
     final url = '$_host$urlPath';
-    final http.BaseResponse response = await httpClient.get(url, headers: {'authorization': 'Secret $secret'});
-    final responseJsonString = utf8.decode((response as http.Response).bodyBytes);
+    final http.BaseResponse response =
+        await httpClient.get(url, headers: {'authorization': 'Secret $secret'});
+    final responseJsonString =
+        utf8.decode((response as http.Response).bodyBytes);
     if (response.statusCode != 200) {
       throw Exception('${response.statusCode}:\n$responseJsonString');
     }
@@ -47,7 +52,8 @@ class SnapfeedApiClient {
     http.BaseResponse response;
     String responseJsonString;
     if (files == null) {
-      response = await httpClient.post(url, headers: {'authorization': 'Secret $secret'}, body: arguments);
+      response = await httpClient.post(url,
+          headers: {'authorization': 'Secret $secret'}, body: arguments);
       responseJsonString = utf8.decode((response as http.Response).bodyBytes);
     } else {
       final multipartRequest = http.MultipartRequest('POST', Uri.parse(url))
@@ -55,7 +61,8 @@ class SnapfeedApiClient {
         ..files.addAll(files);
       multipartRequest.headers['authorization'] = 'Secret $secret';
       response = await multipartRequest.send();
-      responseJsonString = utf8.decode(await (response as http.StreamedResponse).stream.toBytes());
+      responseJsonString = utf8
+          .decode(await (response as http.StreamedResponse).stream.toBytes());
     }
     if (response.statusCode != 200 && response.statusCode != 201) {
       throw Exception('${response.statusCode}:\n$responseJsonString');
@@ -68,7 +75,9 @@ class SnapfeedApiClient {
   }
 
   Future<void> getConfig({
-    @required SetSnapfeedDataStateCallback<SnapfeedConfigApiResponse> onDataStateChanged,
+    @required
+        SetSnapfeedDataStateCallback<SnapfeedConfigApiResponse>
+            onDataStateChanged,
   }) async {
     onDataStateChanged(SnapfeedDataState<SnapfeedConfigApiResponse>.loading());
     try {
@@ -80,14 +89,16 @@ class SnapfeedApiClient {
         ),
       );
     } catch (exception) {
-      onDataStateChanged(SnapfeedDataState<SnapfeedConfigApiResponse>.error(exception));
+      onDataStateChanged(
+          SnapfeedDataState<SnapfeedConfigApiResponse>.error(exception));
     }
   }
 
   Future<void> sendFeedback({
     @required String message,
     @required Uint8List screenshot,
-    @required SetSnapfeedDataStateCallback<Map<String, dynamic>> onDataStateChanged,
+    @required
+        SetSnapfeedDataStateCallback<Map<String, dynamic>> onDataStateChanged,
   }) async {
     onDataStateChanged(SnapfeedDataState<Map<String, dynamic>>.loading());
     try {
@@ -110,9 +121,11 @@ class SnapfeedApiClient {
         ),
       );
     } catch (exception) {
-      onDataStateChanged(SnapfeedDataState<Map<String, dynamic>>.error(exception));
+      onDataStateChanged(
+          SnapfeedDataState<Map<String, dynamic>>.error(exception));
     }
   }
 }
 
-typedef SetSnapfeedDataStateCallback<T> = void Function(SnapfeedDataState<T> dataState);
+typedef SetSnapfeedDataStateCallback<T> = void Function(
+    SnapfeedDataState<T> dataState);

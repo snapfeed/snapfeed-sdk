@@ -16,7 +16,8 @@ class FeedbackPen extends StatefulWidget {
   _FeedbackPenState createState() => _FeedbackPenState();
 }
 
-class _FeedbackPenState extends State<FeedbackPen> with SingleTickerProviderStateMixin {
+class _FeedbackPenState extends State<FeedbackPen>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation<Offset> _slideAnimation;
 
@@ -107,5 +108,6 @@ class _PenNosePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_PenNosePainter oldDelegate) => oldDelegate._color != _color;
+  bool shouldRepaint(_PenNosePainter oldDelegate) =>
+      oldDelegate._color != _color;
 }

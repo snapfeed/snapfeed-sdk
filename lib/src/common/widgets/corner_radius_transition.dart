@@ -13,7 +13,8 @@ class CornerRadiusTransition extends AnimatedWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 4,
-      borderRadius: BorderRadius.lerp(BorderRadius.circular(0), BorderRadius.circular(16), radius.value),
+      borderRadius: BorderRadius.lerp(
+          BorderRadius.circular(0), BorderRadius.circular(16), radius.value),
       clipBehavior: Clip.antiAlias,
       child: child,
     );

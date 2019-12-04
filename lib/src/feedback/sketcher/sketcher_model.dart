@@ -3,7 +3,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class FeedbackSketcherModel extends ChangeNotifier {
-  factory FeedbackSketcherModel(double width, double height) => FeedbackSketcherModel._([], width, height);
+  factory FeedbackSketcherModel(double width, double height) =>
+      FeedbackSketcherModel._([], width, height);
 
   FeedbackSketcherModel._(this._gestures, this.width, this.height);
 
@@ -11,7 +12,8 @@ class FeedbackSketcherModel extends ChangeNotifier {
   double width;
   double height;
 
-  List<FeedbackSketcherGestureModel> get gestures => List.unmodifiable(_gestures);
+  List<FeedbackSketcherGestureModel> get gestures =>
+      List.unmodifiable(_gestures);
 
   FeedbackSketcherGestureModel _last;
 
@@ -50,7 +52,8 @@ class FeedbackSketcherModel extends ChangeNotifier {
 }
 
 class FeedbackSketcherGestureModel {
-  FeedbackSketcherGestureModel(this.mode, this.paint) : assert(mode != null && paint != null);
+  FeedbackSketcherGestureModel(this.mode, this.paint)
+      : assert(mode != null && paint != null);
 
   factory FeedbackSketcherGestureModel.point(Color color, Offset point) {
     return FeedbackSketcherGestureModel(

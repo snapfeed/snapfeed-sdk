@@ -14,7 +14,8 @@ class SnapfeedDismissibleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final bottomPadding = math.max(16.0, mediaQuery.padding.bottom + mediaQuery.viewInsets.bottom);
+    final bottomPadding = math.max(
+        16.0, mediaQuery.padding.bottom + mediaQuery.viewInsets.bottom);
 
     return Material(
       elevation: 12,

@@ -28,11 +28,13 @@ class SnapfeedConfiguration {
     String feedbackMessage,
     String feedbackHint,
     String feedbackSendButton,
-  })  : accentColor = primaryColor ?? SnapfeedTheme.green,
-        teaserPhotoUrl = teaserPhotoUrl ?? 'https://api.snapfeed.dev/assets/images/default.png',
+  })  : accentColor = primaryColor ?? SnapfeedTheme.purple,
+        teaserPhotoUrl = teaserPhotoUrl ??
+            'https://api.snapfeed.dev/assets/images/default.png',
         teaserTitle = teaserTitle ?? 'Hey there!',
-        teaserMessage = teaserMessage ?? 'We just wanted to check if everything is alright with our app 🙂',
-        teaserCancelButton = teaserCancelButton ?? 'All good',
+        teaserMessage = teaserMessage ??
+            'We just wanted to check if everything is alright with our app 🙂',
+        teaserCancelButton = teaserCancelButton ?? 'Close',
         teaserFeedbackButton = teaserFeedbackButton ?? 'Give Feedback',
         feedbackTitle = feedbackTitle ?? 'We\'re listening',
         feedbackMessage = feedbackMessage ??

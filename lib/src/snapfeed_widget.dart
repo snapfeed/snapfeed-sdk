@@ -40,7 +40,8 @@ class Snapfeed extends StatefulWidget {
   SnapfeedState createState() => SnapfeedState();
 
   static SnapfeedState of(BuildContext context) =>
-      context.ancestorStateOfType(const TypeMatcher<SnapfeedState>()) as SnapfeedState;
+      context.ancestorStateOfType(const TypeMatcher<SnapfeedState>())
+          as SnapfeedState;
 }
 
 class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
@@ -70,36 +71,50 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
 
     final window = WidgetsBinding.instance.window;
     final screenSize = window.physicalSize / window.devicePixelRatio;
-    final drawPanelSlideFraction = (FeedbackDrawer.width / screenSize.width) / 2;
+    final drawPanelSlideFraction =
+        (FeedbackDrawer.width / screenSize.width) / 2;
 
-    _animationControllerScreen = AnimationController(vsync: this, duration: const Duration(seconds: 1));
-    _animationControllerSheet = AnimationController(vsync: this, duration: const Duration(milliseconds: 350));
+    _animationControllerScreen =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animationControllerSheet = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 350));
 
-    _sheetSlideAnimation = Tween(begin: const Offset(0.0, 1.0), end: Offset.zero)
-        .chain(CurveTween(curve: Curves.fastOutSlowIn))
-        .animate(_animationControllerSheet);
+    _sheetSlideAnimation =
+        Tween(begin: const Offset(0.0, 1.0), end: Offset.zero)
+            .chain(CurveTween(curve: Curves.fastOutSlowIn))
+            .animate(_animationControllerSheet);
 
     _scaleAnimation = Tween(begin: 1.0, end: 0.70)
-        .chain(CurveTween(curve: const Interval(0.0, 0.5, curve: Curves.fastOutSlowIn)))
+        .chain(CurveTween(
+            curve: const Interval(0.0, 0.5, curve: Curves.fastOutSlowIn)))
         .animate(_animationControllerScreen);
 
     _cornerRadiusAnimation = Tween(begin: 0.0, end: 1.0)
         .chain(CurveTween(curve: const Interval(0.1, 0.3, curve: Curves.ease)))
         .animate(_animationControllerScreen);
 
-    _contentSlideAnimation = Tween(begin: Offset.zero, end: const Offset(0.0, -0.15))
-        .chain(CurveTween(curve: const Interval(0.0, 0.5, curve: Curves.fastOutSlowIn)))
-        .animate(_animationControllerScreen);
+    _contentSlideAnimation =
+        Tween(begin: Offset.zero, end: const Offset(0.0, -0.15))
+            .chain(CurveTween(
+                curve: const Interval(0.0, 0.5, curve: Curves.fastOutSlowIn)))
+            .animate(_animationControllerScreen);
 
-    _slideDrawPanelIn = Tween(begin: Offset.zero, end: Offset(drawPanelSlideFraction, 0.0))
-        .chain(CurveTween(curve: const Interval(0.6, 1.0, curve: Curves.fastOutSlowIn)))
-        .animate(_animationControllerScreen);
+    _slideDrawPanelIn =
+        Tween(begin: Offset.zero, end: Offset(drawPanelSlideFraction, 0.0))
+            .chain(CurveTween(
+                curve: const Interval(0.6, 1.0, curve: Curves.fastOutSlowIn)))
+            .animate(_animationControllerScreen);
 
-    _slideDrawPanelInOverlay = Tween(begin: Offset.zero, end: Offset(-drawPanelSlideFraction, 0.0))
-        .chain(CurveTween(curve: const Interval(0.6, 1.0, curve: Curves.fastOutSlowIn)))
-        .animate(_animationControllerScreen);
+    _slideDrawPanelInOverlay =
+        Tween(begin: Offset.zero, end: Offset(-drawPanelSlideFraction, 0.0))
+            .chain(CurveTween(
+                curve: const Interval(0.6, 1.0, curve: Curves.fastOutSlowIn)))
+            .animate(_animationControllerScreen);
 
-    _apiClient = SnapfeedApiClient(httpClient: http.Client(), projectId: widget.projectId, secret: widget.secret);
+    _apiClient = SnapfeedApiClient(
+        httpClient: http.Client(),
+        projectId: widget.projectId,
+        secret: widget.secret);
     _config = widget.config ?? SnapfeedConfiguration.defaultConfig();
   }
 
@@ -182,7 +197,8 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
                 radius: _cornerRadiusAnimation,
                 child: FeedbackSketcher(
                   key: _sketcherKey,
-                  isEnabled: _uiState == SnapfeedUiState.feedback && _feedbackState.uiState == FeedbackUiState.draw,
+                  isEnabled: _uiState == SnapfeedUiState.feedback &&
+                      _feedbackState.uiState == FeedbackUiState.draw,
                   color: _feedbackState.penColor,
                   child: widget.child,
                 ),
@@ -214,7 +230,8 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
         return const SizedBox(
           height: 80,
           child: Center(
-            child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.grey)),
+            child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.grey)),
           ),
         );
       case SnapfeedUiState.intro:
@@ -223,7 +240,8 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
           onFeedback: () {
             setState(() {
               _uiState = SnapfeedUiState.feedback;
-              _feedbackState = _feedbackState.copyWith(uiState: FeedbackUiState.draw);
+              _feedbackState =
+                  _feedbackState.copyWith(uiState: FeedbackUiState.draw);
               _animationControllerScreen.forward();
             });
           },
@@ -258,7 +276,8 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
 
   Future<void> _getConfiguration() async {
     await _apiClient.getConfig(
-      onDataStateChanged: (SnapfeedDataState<SnapfeedConfigApiResponse> dataState) async {
+      onDataStateChanged:
+          (SnapfeedDataState<SnapfeedConfigApiResponse> dataState) async {
         if (dataState.isIdleOrLoading) {
           _uiState = SnapfeedUiState.loading;
         }
@@ -282,7 +301,8 @@ class SnapfeedState extends State<Snapfeed> with TickerProviderStateMixin {
     await _apiClient.sendFeedback(
       message: message,
       screenshot: screenshot,
-      onDataStateChanged: (SnapfeedDataState<Map<String, dynamic>> dataState) {},
+      onDataStateChanged:
+          (SnapfeedDataState<Map<String, dynamic>> dataState) {},
     );
   }
 
