@@ -8,12 +8,14 @@ jobs:
     runs-on: ubuntu-18.04
     
     container:
-      image: google/dart:2.6
+      image: cirrusci/flutter:stable
 
     steps:
     - uses: actions/checkout@v1.2.0
-    - run: pub get
+
+    - name: Download dependencies
+      run: sudo --preserve-env=PATH env flutter packages get
     - name: Check Formatting
-      run: pub run tool/reformat.dart
+      run: sudo --preserve-env=PATH env flutter pub run tool/reformat.dart
     - name: Analyze
-      run: dartanalyzer --fatal-infos --fatal-warnings lib
+      run: sudo --preserve-env=PATH env flutter analyze --fatal-infos --fatal-warnings lib
