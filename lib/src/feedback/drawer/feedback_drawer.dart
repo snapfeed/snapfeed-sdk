@@ -12,7 +12,7 @@ typedef FeedbackStateChangeCallback = void Function(FeedbackState newState);
 class FeedbackDrawer extends StatefulWidget {
   static const width = 80.0;
 
-  const FeedbackDrawer({Key key, this.onStateChanged})
+  const FeedbackDrawer({Key key, @required this.onStateChanged})
       : assert(onStateChanged != null),
         super(key: key);
 
