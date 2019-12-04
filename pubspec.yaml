@@ -3,6 +3,7 @@ description: Snapfeed is an interactive user feedback tool for Flutter apps. Its
 version: 0.1.0
 author: snapfeed.dev <hey@snapfeed.dev>
 homepage: https://snapfeed.dev
+repository: https://github.com/snapfeed/snapfeed-sdk
 
 environment:
   sdk: ">=2.5.0 <3.0.0"
