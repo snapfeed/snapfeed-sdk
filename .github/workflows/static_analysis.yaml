@@ -1,0 +1,19 @@
+name: Static analysis
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+    
+    container:
+      image: google/dart:2.6
+
+    steps:
+    - uses: actions/checkout@v1.2.0
+    - run: pub get
+    - name: Check Formatting
+      run: pub run tool/reformat.dart
+    - name: Analyze
+      run: dartanalyzer --fatal-infos --fatal-warnings lib
