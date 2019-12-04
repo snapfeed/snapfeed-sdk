@@ -1,12 +1,12 @@
+<p align="center">  
+    <img src="https://user-images.githubusercontent.com/11478053/69978974-adb12200-152d-11ea-9f6e-9f6a55586707.png" alt="Snapfeed Logo"/>  
+</p>
+
 # Snapfeed Beta  
 
 [![Pub](https://img.shields.io/pub/v/snapfeed.svg)](https://pub.dartlang.org/packages/snapfeed)
 [![Build](https://img.shields.io/github/workflow/status/snapfeed/snapfeed-sdk/Static%20Analysis)](https://github.com/snapfeed/snapfeed-sdk/actions)
 [![Website](https://img.shields.io/badge/website-snapfeed.dev-blue.svg)](https://snapfeed.dev/)
-
-<p align="center">  
-    <img src="https://user-images.githubusercontent.com/11478053/69978974-adb12200-152d-11ea-9f6e-9f6a55586707.png" alt="Snapfeed Logo"/>  
-</p>
   
 Hey there and thanks for checking out the Snapfeed Beta 🎉 Snapfeed is probably the easiest and most convenient way to capture in-app user feedback, wishes, ratings and much more. The SDK is completely written in Dart and runs on Android, iOS, Desktop and the Web. For more info, head over to [snapfeed.dev](https://snapfeed.dev). 
   
