@@ -67,4 +67,4 @@ That's it!
   
 ## License  
   
-Snapfeed is released under the [Attribution Assurance License](https://opensource.org/licenses/AAL). See [LICENSE](LICENSE) for details.
+Snapfeed is released under the [Attribution Assurance License](https://opensource.org/licenses/AAL). See [LICENSE](https://github.com/snapfeed/snapfeed-sdk/blob/master/LICENSE) for details.
