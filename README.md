@@ -16,13 +16,13 @@ In order to get started, you need to create an account at [snapfeed.dev](https:/
 
 ### Creating a new project
 
-<img alt="Step 1" src="https://user-images.githubusercontent.com/11478053/69979050-d5a08580-152d-11ea-8140-85df7d2a4f8a.png">
+<img alt="Step 1" src="https://user-images.githubusercontent.com/11478053/70358495-cc8b1d80-1879-11ea-8536-7b0a16be0d25.png">
 
 After signing in you should land on the projects screen where you can find all your current Snapfeed projects. Click on **Create new project** and choose a name for it. Be creative. You can use whatever name you want 🦄
 
 Now your new project has been created! On the **Settings** page you will find your API credentials, namely the project id and secret. You will need to provide those for configuring the SDK.
 
-<img alt="Step2" src="https://user-images.githubusercontent.com/11478053/69979202-26b07980-152e-11ea-9fcb-aa4780d92347.png">
+<img alt="Step2" src="https://user-images.githubusercontent.com/11478053/70358538-e75d9200-1879-11ea-90ad-230c6a4d3962.png">
 
 ### Setting up your Flutter project
 
