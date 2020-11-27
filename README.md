@@ -8,6 +8,8 @@
 [![Build](https://img.shields.io/github/workflow/status/snapfeed/snapfeed-sdk/Static%20Analysis)](https://github.com/snapfeed/snapfeed-sdk/actions)
 [![Website](https://img.shields.io/badge/website-snapfeed.dev-blue.svg)](https://snapfeed.dev/)
   
+### Snapfeed is now Wiredash! [Click here](https://github.com/wiredashio/wiredash-sdk) to go to the new repo.
+
 Hey there and thanks for checking out the Snapfeed Beta 🎉 Snapfeed is probably the easiest and most convenient way to capture in-app user feedback, wishes, ratings and much more. The SDK is completely written in Dart and runs on Android, iOS, Desktop and the Web. For more info, head over to [snapfeed.dev](https://snapfeed.dev). 
   
 ## Getting Started  
